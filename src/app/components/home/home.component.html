@@ -1,0 +1,53 @@
+<nav class="navbar navbar-dark bg-primary py-4">
+</nav>
+<div class="container">
+    <!--Boton-->
+    <div class="row mt-3">
+        <div class="offset-8 col-4 text-center">
+            <!--<button class="btn btn-outline-primary">Agregar</button>-->
+            <app-modal-form (message)="creado($event)" (click)="definirValores()"></app-modal-form>
+        </div>
+    </div>
+    <!--/Boton-->
+    <!--Tabla-->
+    <div class="mt-4">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="ID">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.ID}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Alias">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Alias </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Alias}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ID_Banco">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ID Banco </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.ID_Banco}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Ultimos_Digitos">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ultimos Dígitos </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Ultimos_Digitos}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <i class="far fa-trash-alt mr-3" style="color: red; cursor: pointer;" (click)="delete(row.ID);"></i>
+                    <i class="far fa-edit mr-3" style="color: #007bff; cursor: pointer;" (click)="edit(row);"></i>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row class="blue-header" *matHeaderRowDef="displayedColumns; sticky: true;">
+            </mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectChange(row)">
+            </mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+<!--/Tabla-->

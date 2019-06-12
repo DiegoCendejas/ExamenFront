@@ -1,0 +1,51 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{modalTitle}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <form #form (ngSubmit)="crearCuenta(form)">
+        <div class="modal-body">
+            <p>Completa los siguientes campos:</p>
+            <div class="row">
+                <div class="offset-1 col-10">
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <label>Alias: </label>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" name="Alias" class="form-control" [(ngModel)]="cuenta.Alias" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <label>Banco</label>
+                        </div>
+                        <div class="col-7">
+                            <select name="ID_Banco" class="form-control" [(ngModel)]="cuenta.ID_Banco" required>
+                            <option value="undefined" disabled>Seleccione una opci&oacute;n</option>
+                <option *ngFor="let item of listofBanks" value="{{item.ID}}">{{item.Banco}}</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <label>&Uacute;ltimos d&iacute;gitos: </label>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" name="Ultimos_Digitos" class="form-control" [(ngModel)]="cuenta.Ultimos_Digitos" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" ngbAutofocus class="btn btn-outline-secondary" (click)="c('Close click')">Cancelar</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+    </form>
+</ng-template>
+<div class="add-layer">
+    <button class="btn btn-outline-primary" (click)="open(content)">Agregar</button>
+</div>
